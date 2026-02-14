@@ -1,22 +1,20 @@
-
-### DOMAIN.md
-```markdown
 # Domain Model
 
-## Transactions
-- Transaction: يمثل معاملة مالية.
-- TransactionItem: يمثل عنصر داخل المعاملة.
-- Events:
+## Transactions Context
+- **Aggregates**: Transaction, TransactionItem
+- **Business Rules**:
+  - Cannot submit empty transaction.
+  - Cannot cancel after confirmation unless merchant.
+- **Events**:
   - TransactionSubmitted
   - TransactionCancelled
 
-## Payments
-- Payment: يمثل عملية دفع مرتبطة بمعاملة.
-- Events:
+## Payments Context
+- **Aggregates**: Payment
+- **Business Rules**:
+  - Payment must be linked to a transaction.
+  - Payment can be confirmed or failed.
+- **Events**:
   - PaymentStarted
   - PaymentConfirmed
   - PaymentFailed
-
-## قواعد الأعمال
-- لا يمكن تأكيد معاملة بدون عناصر.
-- الدفع مرتبط دائمًا بمعاملة موجودة.
