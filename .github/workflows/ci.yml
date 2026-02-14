@@ -47,6 +47,7 @@ jobs:
     - name: Run Tests
       run: dotnet test ./tests --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
 
+
     - name: Publish Test Results
       uses: actions/upload-artifact@v3
       with:
