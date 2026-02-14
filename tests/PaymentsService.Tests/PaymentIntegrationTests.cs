@@ -1,4 +1,5 @@
 using Xunit;
+using Microsoft.EntityFrameworkCore;
 
 public class PaymentIntegrationTests
 {
