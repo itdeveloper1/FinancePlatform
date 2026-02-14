@@ -1,17 +1,17 @@
 # Architecture
 
-## Layers
-- Domain: الكيانات والأحداث.
-- Application: الخدمات وقواعد الأعمال.
-- Infrastructure: قواعد البيانات، Outbox، RabbitMQ.
-- API: Controllers وواجهات REST.
+## Diagram
+Transactions Service → RabbitMQ → Payments Service → RabbitMQ → Transactions Service
 
-## Patterns
-- Outbox Pattern لضمان نشر الأحداث بشكل موثوق.
-- Idempotency لتجنب التكرار.
-- DLQ (Dead Letter Queue) لمعالجة الأخطاء.
-- CI/CD عبر GitHub Actions.
+## Components
+- **Transactions Service**: Manages transactions and items.
+- **Payments Service**: Manages payments linked to transactions.
+- **RabbitMQ**: Event broker.
+- **SQL Server**: Persistent storage.
+- **Outbox Pattern**: Ensures reliable event publishing.
 
 ## Trade-offs
-- اخترنا RabbitMQ لأنه أبسط من Kafka في هذا السياق.
-- استخدمنا SQL Server لأنه مدعوم رسميًا مع EF Core.
+- RabbitMQ chosen for simplicity and reliability.
+- Outbox Pattern chosen to avoid lost events.
+- Idempotency ensures duplicate events do not cause errors.
+- DLQ handles failed events safely.
