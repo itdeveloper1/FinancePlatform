@@ -52,7 +52,7 @@ jobs:
 
       - name: Initialize Database Schema
         run: |
-          /opt/mssql-tools18/bin/sqlcmd -S localhost,1433 -U sa -P Your_password123 -d master -i ${{ github.workspace }}/FinancePlatform/Infrastructure/Database/schema.sql
+          /opt/mssql-tools18/bin/sqlcmd -S localhost,1433 -U sa -P Your_password123 -d master -i ${{ github.workspace }}/Infrastructure/Database/schema.sql
 
       - name: Run Tests
         run: dotnet test FinancePlatform.API/FinancePlatform.API.csproj --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
