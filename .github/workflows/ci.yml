@@ -35,17 +35,17 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore FinancePlatform.sln
+        run: dotnet restore FinancePlatform.API/FinancePlatform.API.csproj
 
       - name: Build
-        run: dotnet build FinancePlatform.sln --no-restore --configuration Release
+        run: dotnet build FinancePlatform.API/FinancePlatform.API.csproj --no-restore --configuration Release
 
       - name: Initialize Database Schema
         run: |
           /opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P Your_password123 -d master -i FinancePlatform/Infrastructure/Database/schema.sql
 
       - name: Run Tests
-        run: dotnet test FinancePlatform.sln --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
+        run: dotnet test FinancePlatform.API/FinancePlatform.API.csproj --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
 
       - name: Publish Test Results
         uses: actions/upload-artifact@v4
