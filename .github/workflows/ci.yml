@@ -42,7 +42,8 @@ jobs:
 
       - name: Initialize Database Schema
         run: |
-          /opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P Your_password123 -d master -i FinancePlatform/Infrastructure/Database/schema.sql
+          docker exec $(docker ps -q -f ancestor=mcr.microsoft.com/mssql/server:2022-latest) \
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Your_password123 -d master -i /FinancePlatform/Infrastructure/Database/schema.sql
 
       - name: Run Tests
         run: dotnet test FinancePlatform.API/FinancePlatform.API.csproj --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
