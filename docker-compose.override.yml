@@ -1,0 +1,4 @@
+queues:
+  payments:
+    arguments:
+      x-dead-letter-exchange: payments-dlx
