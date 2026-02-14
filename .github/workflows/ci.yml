@@ -35,14 +35,14 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore ./src
+      run: dotnet restore ./FinancePlatform
 
     - name: Build
-      run: dotnet build ./src --no-restore --configuration Release
+      run: dotnet build ./FinancePlatform --no-restore --configuration Release
 
     - name: Initialize Database Schema
       run: |
-        /opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P Your_password123 -d master -i src/Infrastructure/Database/schema.sql
+        /opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P Your_password123 -d master -i FinancePlatform/Infrastructure/Database/schema.sql
 
     - name: Run Tests
       run: dotnet test ./tests --no-build --configuration Release --logger "trx;LogFileName=test_results.trx"
